@@ -1,0 +1,76 @@
+/**This class controls the DVD Store, by allowing the user to choose to display all DVDs, rent DVDs and it also allows to add DVDs to the store
+
+ * @author swaleha
+ *	@date 07/10/2017
+ */
+import java.util.Scanner;
+
+public class Controller {
+
+	public static void main(String[] args) {
+		System.out.println("Welcome to my DVD Store!");
+		Controller control = new Controller();
+		Store store = new Store();
+		Scanner scan = new Scanner(System.in);
+		Scanner doubleScanner = new Scanner(System.in);
+		int input = -1;
+
+		while (input != 0) {
+
+			input = control.displayMenu();
+			switch (input) {
+
+			case 1:
+				// List DVDs
+
+				store.listDVDs();
+				break;
+
+			case 2:
+				// Rent DVD
+
+				System.out
+						.println("Please enter the DVD name you want to rent:");
+				String name = scan.nextLine();
+				store.rentDVD(name);
+				break;
+
+			case 3:
+				// Add DVD
+
+				System.out
+						.println("Please enter the details of the DVD to add to the store:");
+				System.out.println("Please enter the DVD name:");
+				String name2 = scan.nextLine();
+				System.out.println("Please enter the DVD cost:");
+				double cost = doubleScanner.nextDouble();
+				store.addDVD(name2, cost);
+				System.out.println("DVD added successfully!");
+				break;
+
+			case 0:
+				break;
+
+			default:
+				System.out.println("\n\nInvalid choice!");
+				break;
+
+			}
+		}
+	}
+
+	private int displayMenu() {
+
+		System.out.println("\n\nPress 0 to Exit");
+		System.out.println("\nPress 1 to diplay all DVDs");
+		System.out.println("Press 2 to rent a DVD");
+		System.out.println("Press 3 to add a DVD to the store");
+		System.out.println("Enter your choice:");
+
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		int input = scan.nextInt();
+		return input;
+	}
+
+}
