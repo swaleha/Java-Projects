@@ -1,0 +1,56 @@
+/**The Store class contains methods to list all DVDs in the store, rent the DVDs present in the store and add DVDs to the store
+
+ * @author swaleha 
+ */
+import java.util.*;
+
+public class Store {
+
+	List<DVD> dvds;
+	double money;
+
+	public Store() {
+		dvds = new ArrayList<DVD>();
+
+		// add new dvds
+		dvds.add(new DVD("Jumanji", 10.00, true));
+		dvds.add(new DVD("Transformers", 12.00, true));
+	}
+
+	public void listDVDs() {
+		Iterator itr = dvds.iterator();
+		while (itr.hasNext()) {
+			DVD dvd = (DVD) itr.next();
+			System.out.println("\tName: " + dvd.getName() + "\tPrice: "
+					+ dvd.getCost() + "\tAvailability: " + dvd.isAvailable());
+		}
+	}
+
+	public boolean rentDVD(String name) {
+		Iterator itr = dvds.iterator();
+		while (itr.hasNext()) {
+			DVD dvd = (DVD) itr.next();
+			if (dvd.getName().equals(name)) {
+				if (dvd.isAvailable()) {
+					// rent DVD
+					this.money += dvd.getCost();
+					dvd.rent();
+					System.out.println("DVD rented successfully!");
+					return true;
+
+				} else {
+					System.out.println("Sorry! The DVD is already taken");
+					return false;
+				}
+			}
+
+		}
+
+		System.out.println("Sorry! The DVD is not in the list");
+		return false;
+	}
+
+	public void addDVD(String name, double cost) {
+		dvds.add(new DVD(name, cost, true));
+	}
+}
